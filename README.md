@@ -121,7 +121,11 @@ Since Lob charges per request, you can set `delaySearch` to true which delays an
 
 
 ## Latest Release
-### 1.0.8 (LATEST RELEASE)
+### 1.0.9 (LATEST RELEASE)
+| Latest improvements |
+| :---          |
+| Moved to an open source repo |
+### 1.0.8
 | Latest improvements |
 | :---          |
 | Introduction of Autocomplete Forms |
