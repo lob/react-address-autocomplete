@@ -19,7 +19,7 @@ npm install --save @lob/react-address-autocomplete
 
 ## Demo
 
-![LOB Autocomplete Demo](https://github.com/lob/address-autocomplete-demo-images/blob/main/autocompleteDemo.gif)
+![LOB Autocomplete Demo](./demo/autocompleteDemo.gif)
 
 ## Address Autocomplete Search Bar Demo Code 
 
@@ -87,9 +87,9 @@ export default AddressFormDemo;
 
 Head to [Lob.com](https://www.lob.com/) and create your account. Head to the dashboard and click on Address Verification Getting Started to find your API keys. It's reccomended to use your publishable Live key for front end components. Lob Autocomplete has free unlimited requests so you don't have to worry about any credit card charges :)
 
-![Address Verification dashboard](https://github.com/lob/address-autocomplete-demo-images/blob/main/imageedit_3_7790103450.png)
+![Address Verification dashboard](./demo/imageedit_3_7790103450.png)
 
-![API Keys](https://github.com/lob/address-autocomplete-demo-images/blob/main/imageedit_9_6449771641.png)
+![API Keys](./demo/imageedit_9_6449771641.png)
 
 ## Quick Usage
 
