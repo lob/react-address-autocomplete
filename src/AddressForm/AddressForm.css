@@ -1,0 +1,38 @@
+
+.addressForm {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+}
+
+.addressFormRow:not(:last-child) {
+  margin-bottom: 1em;
+}
+
+.addressFormRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.addressFormRow > label {
+  align-self: center;
+  min-width: 5em;
+  margin-right: 1em;
+  text-align: end;
+}
+
+.addressFormRow > input {
+  flex-grow: 1;
+}
+
+/* Mimics UI of react-select for consistency */
+.mockReactSelectInput {
+  background-color: hsl(0, 0%, 100%);
+  border: solid 1px hsl(0, 0%, 80%);
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 38px;
+  outline: 0!important;
+  padding: 0px 8px;
+  width: 100%;
+}

@@ -1,0 +1,84 @@
+{
+  "name": "@lob/react-address-autocomplete",
+  "version": "1.0.7",
+  "description": "A collection of components and utility functions for verifying and suggesting addresses using Lob",
+  "author": "Lob",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "microbundle-crl --no-compress --format modern,cjs --css inline",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs --css inline",
+    "prepare": "run-s build",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lob/react-address-autocomplete.git"
+  },
+  "dependencies": {
+    "base-64": "^1.0.0",
+    "lodash.throttle": "^4.1.1",
+    "react-select": "^4.3.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.0",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.25.2",
+    "eslint-plugin-standard": "^5.0.0",
+    "microbundle-crl": "^0.13.10",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3"
+  },
+  "keywords": [
+    "address autocomplete",
+    "address verification",
+    "address",
+    "addresses",
+    "auto-suggest",
+    "autocomplete search",
+    "autocomplete",
+    "autocomplete",
+    "av",
+    "international",
+    "lob",
+    "lob address verification",
+    "places autocomplete",
+    "places",
+    "react",
+    "street-address",
+    "validate",
+    "validation",
+    "verification",
+    "verify"
+  ],
+  "bugs": {
+    "url": "https://github.com/lob/react-address-autocomplete/issues"
+  },
+  "homepage": "https://github.com/lob/react-address-autocomplete#readme"
+}

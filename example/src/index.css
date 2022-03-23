@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1 {
+  color: #416581; /* Shadow 50 */
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+}
+
+h2 {
+  color: #5F83A5; /* Steel */
+  font-family: 'Lato', sans-serif;
+  font-family: 'Larsseit' ,sans-serif;
+  margin-top: 2em;
+}
+
+button {
+  -webkit-transition: background-color .2s;
+  background-color: #0099d7;
+  border-radius: 5px;
+  border: 2px #0099d7;
+  color: #fff;
+  flex-shrink: 1;
+  font-family: Larsseit,sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 16px;
+  margin-left: 1em;
+  padding: 12px 24px;
+  position: relative;
+  text-decoration: none;
+  transition: background-color .2s;
+}
+
+button:hover {
+  background-color: #1878e0;
+  text-decoration: none;
+}
+
+.appContainer {
+  margin: 1em;
+}
+
+.logo {
+  height: 1.5em;
+  margin-bottom: 2em;
+  vertical-align: bottom;
+}
+
+.apiResultContainer {
+  border-radius: 4px;
+  font-family: Larsseit,sans-serif;
+  color: #324350; /* midnight */
+  margin-top: 0.5em;
+  padding: 0.5em 1em;
+  width: 32em;
+}
+
+.apiErrorText {
+  color: #F76E40;
+  font-family: Larsseit,sans-serif;
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.countryLabel {
+  color: #5F83A5; /* Steel */
+  font-family: 'Lato', sans-serif;
+  font-family: 'Larsseit' ,sans-serif;
+  font-weight: bold;
+  margin-right: 1em;
+  width: 4em;
+}
+
+.demoContainer {
+  width: 30em;
+}
+
+.green {
+  background-color: #6CC39950
+}
+
+.red {
+  background-color: #FF9E9850
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Mimics UI of react-select for consistency */
+.mockReactSelectInput {
+  background-color: hsl(0, 0%, 100%);
+  border: solid 1px hsl(0, 0%, 80%);
+  border-radius: 4px;
+  box-sizing: border-box;
+  min-height: 38px;
+  outline: 0!important;
+  padding: 0px 8px;
+  width: 100%;
+}
+
+.internationalInputPlaceholder {
+  box-sizing: border-box;
+  color: hsl(0, 0%, 50%);
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 0px 8px;
+  position: absolute;
+  transform: translateY(50%);
+}
+
+.hide {
+  display: none;
+}
