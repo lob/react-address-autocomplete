@@ -60,7 +60,7 @@ const getLobLabel = () => (
 
 // /**
 //  * @callback onSuggestion
-//  * @param {Array.<SelectionObject>} suggestions - Address that start the same as the user's input
+//  * @param {Array.<SelectionObject>} suggestions - Address that start the same as the user's input.
 //  */
 
 /**
@@ -179,6 +179,10 @@ const Autocomplete = ({
     onSelection(option)
   }
 
+  const customFilter = (candidate, input) => {
+    return candidate
+  };
+
   return (
     <Select
       components={{ Input }}
@@ -193,6 +197,7 @@ const Autocomplete = ({
       // the behavior of our input component.
       onChange={handleChange}
       onInputChange={handleInputChange}
+      filterOption={customFilter}
     />
   )
 }
