@@ -66,14 +66,12 @@ describe('Autocomplete', () => {
       })
     )
 
-    const handleSuggestion = jest.fn()
     const handleSelection = jest.fn()
     const handleError = jest.fn()
     const { container } = render(
       <Autocomplete
         apiKey='abc123'
         onSelection={handleSelection}
-        onSuggestion={handleSuggestion}
         onError={handleError}
       />
     )
@@ -85,39 +83,6 @@ describe('Autocomplete', () => {
         target: { value: '123' }
       })
     })
-
-    const expectedSuggestions = [
-      {
-        label: '123 Sesame St New York NY',
-        value: {
-          city: 'New York',
-          primary_line: '123 Sesame St',
-          state: 'NY',
-          zip_code: '12345'
-        }
-      },
-      {
-        label: "123 Bowser's Castle Mushroom Kingdom JA",
-        value: {
-          city: 'Mushroom Kingdom',
-          primary_line: "123 Bowser's Castle",
-          state: 'JA',
-          zip_code: '12345'
-        }
-      },
-      {
-        label: "123 Micky's Clubhouse Disneyland FL",
-        value: {
-          city: 'Disneyland',
-          primary_line: "123 Micky's Clubhouse",
-          state: 'FL',
-          zip_code: '12345'
-        }
-      }
-    ]
-
-    expect(handleSuggestion).toHaveBeenCalled()
-    expect(handleSuggestion).toHaveBeenCalledWith(expectedSuggestions)
 
     // Trigger selection
     await act(async () => {
