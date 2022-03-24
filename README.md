@@ -117,7 +117,7 @@ The `onSelect` prop is callback function that fires whenever an autocomplete sug
 
 Since Lob charges per request, you can set `delaySearch` to true which delays an API call until a user finishes typing in order to reduce API load if you want. Additionally you can set `debounceValue` to control how long to wait between calls in milliseconds.
 
-[Click here for more details about the props for each component](https://github.com/lob/av-integrations/wiki/React-Address-Autocomplete-Component-Props)
+[Click here for more details about the props for each component](https://github.com/lob/react-address-autocomplete/wiki/React-Address-Autocomplete-Component-Props)
 
 
 ## Latest Release
@@ -131,10 +131,12 @@ Since Lob charges per request, you can set `delaySearch` to true which delays an
 | Introduction of Autocomplete Forms |
 | Removed UI restrictions blocking flow of autocomplete results | 
 ### 1.0.7
+| 1.0.7 |
 | :---          |
 | README updates |
 | Improved API performance and autocomplete accuracy | 
 ### 1.0.6 
+| 1.0.6 |
 | :---          |
 | Minor bug fixes in the demo app |
 | Prevents Autocomplete from calling API on render |
