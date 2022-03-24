@@ -73,7 +73,6 @@ const AddressForm = ({
   }
 
   const mergedStyles = useMergedStyles(styles, false /* isInternational */)
-  console.log('mergedStyles', mergedStyles)
 
   return (
     <div style={mergedStyles.lob_container}>

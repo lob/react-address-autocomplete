@@ -3,8 +3,8 @@ import React from 'react'
 
 // Internal Dependencies
 import AddressFormDemo from './AddressFormDemo'
-import DomesticDemo from './DomesticDemo'
-import InternationalDemo from './InternationalDemo'
+// import DomesticDemo from './DomesticDemo'
+// import InternationalDemo from './InternationalDemo'
 
 const API_KEY = 'live_pub_16d30adbb46a1c360ebf7d1e6b48361'
 
@@ -20,7 +20,7 @@ const App = () => {
       <h1>React Address Autocomplete Demo</h1>
       {/* <DomesticDemo apiKey={API_KEY} />
       <InternationalDemo apiKey={API_KEY} /> */}
-      <AddressFormDemoNoVerification apiKey={API_KEY} />
+      <AddressFormDemo apiKey={API_KEY} />
     </div>
   );
 }

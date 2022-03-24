@@ -6,7 +6,7 @@ export const postAutocompleteAddress = (
   addressPrefix,
   additionalAddressData
 ) => {
-  const url = 'https://api.lob.com/v1/us_autocompletions'
+  const url = 'https://api.lob.com/v1/us_autocompletions?valid_addresses=true'
   const init = {
     method: 'POST',
     headers: {

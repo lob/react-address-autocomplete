@@ -1,6 +1,3 @@
-// External Dependencies
-import { useEffect, useState } from 'react'
-
 let baseStyles = {
   lob_container: {
     display: 'flex',
