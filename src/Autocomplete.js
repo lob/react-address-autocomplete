@@ -21,7 +21,7 @@ const getLobLabel = () => (
       <img
         style={{ height: '1.1em', verticalAlign: 'bottom' }}
         // eslint-disable-next-line max-len
-        src='https://admin.google.com/u/0/ac/images/logo.gif?uid=115468147059962245207&service=google_gsuite'
+        src='lob_logo.png'
         alt='Lob'
       />
     </p>
@@ -179,6 +179,10 @@ const Autocomplete = ({
     onSelection(option)
   }
 
+  const customFilter = (candidate, input) => {
+    return candidate
+  }
+
   return (
     <Select
       components={{ Input }}
@@ -193,6 +197,7 @@ const Autocomplete = ({
       // the behavior of our input component.
       onChange={handleChange}
       onInputChange={handleInputChange}
+      filterOption={customFilter}
     />
   )
 }
