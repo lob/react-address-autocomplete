@@ -6,7 +6,6 @@ import throttle from 'lodash.throttle'
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
 
-
 const getLobLabel = () => (
   <div>
     <p>
