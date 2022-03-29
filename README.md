@@ -120,29 +120,8 @@ Since Lob charges per request, you can set `delaySearch` to true which delays an
 [Click here for more details about the props for each component](https://github.com/lob/react-address-autocomplete/wiki/React-Address-Autocomplete-Component-Props)
 
 
-## Latest Release
-### 1.0.9 (LATEST RELEASE)
-| Latest improvements |
-| :---          |
-| Moved to an open source repo |
-### 1.0.8
-| Latest improvements |
-| :---          |
-| Introduction of Autocomplete Forms |
-| Removed UI restrictions blocking flow of autocomplete results | 
-### 1.0.7
-| 1.0.7 |
-| :---          |
-| README updates |
-| Improved API performance and autocomplete accuracy | 
-### 1.0.6 
-| 1.0.6 |
-| :---          |
-| Minor bug fixes in the demo app |
-| Prevents Autocomplete from calling API on render |
-
-
-[View release notes from previous versions](https://github.com/lob/av-integrations/wiki/React-Address-Autocomplete-Release-Log)
+## Release Logs
+[View release notes from previous versions](https://github.com/lob/react-address-autocomplete/releases)
 
 ## License
 
