@@ -6,14 +6,6 @@ import throttle from 'lodash.throttle'
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
 
-// Utility functions
-const capitalizeFirstLetter = (txt) =>
-  txt
-    .toLowerCase()
-    .split(' ')
-    .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
-    .join(' ')
-
 const getLobLabel = () => (
   <div>
     <p>
@@ -117,9 +109,7 @@ const Autocomplete = ({
 
         const newSuggestions = suggestions.map((x) => ({
           value: x,
-          label: `${capitalizeFirstLetter(
-            x.primary_line
-          )} ${capitalizeFirstLetter(x.city)} ${x.state}`
+          label: `${x.primary_line} ${x.city} ${x.state}`
         }))
 
         setAutocompleteResults(newSuggestions)
