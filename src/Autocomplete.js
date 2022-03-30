@@ -7,17 +7,18 @@ import throttle from 'lodash.throttle'
 import { postAutocompleteAddress } from './api'
 
 const getLobLabel = () => (
-  <div>
-    <p>
-      Powered by{' '}
-      <img
-        style={{ height: '1.1em', verticalAlign: 'bottom' }}
-        // eslint-disable-next-line max-len
-        src='lob_logo.png'
-        alt='Lob'
-      />
-    </p>
-  </div>
+  <a
+    href='https://www.lob.com/address-verification'
+    style={{ color: 'hsl(0, 0%, 50%)', textDecoration: 'inherit' }}
+  >
+    <span style={{ verticalAlign: 'top' }}>Powered by </span>
+    <img
+      style={{ height: '1.25em', margin: '0px 0px 1px 4px' }}
+      // eslint-disable-next-line max-len
+      src='lob_logo.jpg'
+      alt='Lob'
+    />
+  </a>
 )
 
 /**
@@ -112,7 +113,13 @@ const Autocomplete = ({
           label: `${x.primary_line} ${x.city} ${x.state}`
         }))
 
-        setAutocompleteResults(newSuggestions)
+        setAutocompleteResults([
+          ...newSuggestions,
+          {
+            value: 'none',
+            label: getLobLabel()
+          }
+        ])
       })
       .catch((err) => {
         console.error(err.message)
