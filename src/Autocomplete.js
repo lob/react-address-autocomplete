@@ -15,7 +15,7 @@ const getLobLabel = () => (
     <img
       style={{ height: '1.25em', margin: '0px 0px 1px 4px' }}
       // eslint-disable-next-line max-len
-      src='lob_logo.jpg'
+      src='lob_logo.png'
       alt='Lob'
     />
   </a>
