@@ -14,7 +14,7 @@ const getLobLabel = () => (
   >
     <span style={{ verticalAlign: 'top' }}>Powered by </span>
     <img
-      style={{ height: '1.25em', marginLeft: '-6px' }}
+      style={{ height: '1.25em', marginLeft: '4px' }}
       // eslint-disable-next-line max-len
       src={logo}
       alt='Lob'
