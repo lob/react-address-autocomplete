@@ -28,7 +28,7 @@
     "react/jsx-fragments": 0,
     "react/no-unused-prop-types": 0,
     "import/export": 0,
-    "max-len": ["error", { "code": 100 }]
+    "max-len": ["warn", { "code": 100 }]
   },
   "globals": { "fetch": false }
 }
