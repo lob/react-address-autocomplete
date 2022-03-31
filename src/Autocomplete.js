@@ -13,9 +13,9 @@ const getLobLabel = () => (
   >
     <span style={{ verticalAlign: 'top' }}>Powered by </span>
     <img
-      style={{ height: '1.25em', margin: '0px 0px 1px 4px' }}
+      style={{ height: '1.25em', marginLeft: '-6px' }}
       // eslint-disable-next-line max-len
-      src='lob_logo.png'
+      src='https://admin.google.com/u/0/ac/images/logo.gif?uid=115468147059962245207&service=google_gsuite'
       alt='Lob'
     />
   </a>
