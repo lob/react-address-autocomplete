@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Select, { components } from 'react-select'
 import throttle from 'lodash.throttle'
+import logo from './lob_logo.png'
 
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
@@ -15,7 +16,7 @@ const getLobLabel = () => (
     <img
       style={{ height: '1.25em', marginLeft: '-6px' }}
       // eslint-disable-next-line max-len
-      src='https://admin.google.com/u/0/ac/images/logo.gif?uid=115468147059962245207&service=google_gsuite'
+      src={logo}
       alt='Lob'
     />
   </a>
