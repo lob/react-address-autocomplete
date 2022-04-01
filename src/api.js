@@ -6,8 +6,11 @@ export const postAutocompleteAddress = (
   addressPrefix,
   additionalAddressData
 ) => {
-  const url =
-    'https://api.lob.com/v1/us_autocompletions?valid_addresses=true&case=proper'
+  const url = new URL('https://api.lob.com/v1/us_autocompletions')
+  url.searchParams.append('av_integration_origin', window.location.href)
+  url.searchParams.append('integration', 'react-address-autocomplete')
+  url.searchParams.append('valid_addresses', 'true')
+  url.searchParams.append('case', 'proper')
   const init = {
     method: 'POST',
     headers: {
@@ -25,7 +28,9 @@ export const postAutocompleteAddress = (
 
 export const postVerifyAddress = (apiKey, address) => {
   const payload = typeof address === 'string' ? { address } : address
-  const url = 'https://api.lob.com/v1/us_verifications'
+  const url = new URL('https://api.lob.com/v1/us_verifications')
+  url.searchParams.append('av_integration_origin', window.location.href)
+  url.searchParams.append('integration', 'react-address-autocomplete')
   const init = {
     method: 'POST',
     headers: {
@@ -43,7 +48,9 @@ export const postVerifyInternationalAddress = (
   address,
   countryCode
 ) => {
-  const url = 'https://api.lob.com/v1/intl_verifications'
+  const url = new URL('https://api.lob.com/v1/intl_verifications')
+  url.searchParams.append('av_integration_origin', window.location.href)
+  url.searchParams.append('integration', 'react-address-autocomplete')
   const init = {
     method: 'POST',
     headers: {
