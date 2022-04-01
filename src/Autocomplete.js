@@ -2,20 +2,20 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Select, { components } from 'react-select'
 import throttle from 'lodash.throttle'
+import './Autocomplete.css'
 
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
 
-const getLobLabel = () => (
-  <a
-    href='https://www.lob.com/address-verification'
-    style={{ color: 'hsl(0, 0%, 50%)', textDecoration: 'inherit' }}
-  >
-    <span style={{ verticalAlign: 'top' }}>Powered by </span>
+const LOB_LABEL = 'lob-label'
+const LOB_URL = 'https://www.lob.com/address-verification'
+
+const LobLogo = ({ className }) => {
+  return (
     <svg
-      style={{ height: '.9em', marginLeft: '1px', marginTop: '3px' }}
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 1259 602'
+      className={className}
     >
       <path
         fill='#0099d7'
@@ -23,7 +23,22 @@ const getLobLabel = () => (
         d='M1063,141c-47.06,0-89,18.33-121,50.78V0H780V338.74C765,222.53,666.88,138,540,138c-137,0-242,101-242,232a235,235,0,0,0,7.7,60H164V0H0V585H307l14.54-112.68C359.94,550,441.74,602,540,602c127.75,0,225.08-83.62,240-200.41V585H930V540.27c31.8,37,77.27,56.73,133,56.73,103,0,196-109,196-228C1259,239,1175,141,1063,141ZM540,450c-45,0-81-36-81-80s36-80,81-80c46,0,81,35,81,80S585,450,540,450Zm475-1c-46,0-83-36-83-80a82.8,82.8,0,0,1,82.6-83h.4c47,0,85,37,85,83C1100,413,1062,449,1015,449Z'
       />
     </svg>
+  )
+}
+
+const poweredByLob = () => (
+  <a href={LOB_URL} className='lob-gray-text'>
+    <span style={{ verticalAlign: 'top' }}>Powered by </span>
+    <LobLogo className='lob-logo' />
   </a>
+)
+
+const getLobLabel = () => (
+  <div className={LOB_LABEL}>
+    <LobLogo className='logo-large' />
+    <span className='lob-gray-text'>Deliverable addresses</span>
+    <a href={LOB_URL}>Learn more</a>
+  </div>
 )
 
 /**
@@ -119,11 +134,11 @@ const Autocomplete = ({
         }))
 
         setAutocompleteResults([
-          ...newSuggestions,
           {
-            value: 'none',
+            value: LOB_LABEL,
             label: getLobLabel()
-          }
+          },
+          ...newSuggestions
         ])
       })
       .catch((err) => {
@@ -143,7 +158,7 @@ const Autocomplete = ({
         fetchData(inputValue, addressComponentValues)
       }
     }
-  }, [inputValue])
+  }, [inputValue, delaySearch])
 
   /** Event handlers */
 
@@ -163,6 +178,11 @@ const Autocomplete = ({
 
   // Fires when the select component has changed (as opposed to the input inside the select)
   const handleChange = (option) => {
+    if (option.value === LOB_LABEL) {
+      window.location.href = LOB_URL
+      return
+    }
+
     // User has pasted an address directly into input, let's call the API
     if (typeof option === 'string') {
       setInputValue(option)
@@ -181,8 +201,30 @@ const Autocomplete = ({
     onSelection(option)
   }
 
+  const handleSelect = (option) => {
+    if (option.value !== LOB_LABEL) {
+      reactSelectProps.onSelect(option)
+    }
+  }
+
   const customFilter = (candidate, input) => {
     return candidate
+  }
+
+  // Remove padding from first option which is our Lob label
+  const customStyles = {
+    option: (styles, { data }) => {
+      if (data.value === LOB_LABEL) {
+        return {
+          ...styles,
+          background: 'none',
+          cursor: 'pointer',
+          padding: '0'
+        }
+      }
+      return styles
+    },
+    ...reactSelectProps.styles
   }
 
   return (
@@ -191,15 +233,17 @@ const Autocomplete = ({
       inputValue={inputValue}
       options={autocompleteResults}
       controlShouldRenderValue={false}
-      noOptionsMessage={getLobLabel}
+      noOptionsMessage={poweredByLob}
       placeholder='Start typing an address...'
       value={selectValue}
       {...reactSelectProps}
       // We don't let user completely override onChange and onInputChange and risk them breaking
       // the behavior of our input component.
+      filterOption={customFilter}
       onChange={handleChange}
       onInputChange={handleInputChange}
-      filterOption={customFilter}
+      onSelect={handleSelect}
+      styles={customStyles}
     />
   )
 }
