@@ -41,6 +41,48 @@ const getLobLabel = () => (
   </div>
 )
 
+// Highlight the users input in the primary line by comparing char by char. We only check the
+// primary line for simplicity sake
+const getOptionElement = (suggestion, inputValue) => {
+  /* eslint-disable camelcase */
+  const { primary_line, city, state, zip_code } = suggestion
+
+  let boldStopIndex = 0
+
+  inputValue.split('').forEach((inputChar) => {
+    if (
+      inputChar.toLowerCase() ===
+      primary_line.charAt(boldStopIndex).toLowerCase()
+    ) {
+      boldStopIndex += 1
+    }
+  })
+
+  const primaryLineElement =
+    boldStopIndex === 0 ? (
+      <span>{primary_line}, </span>
+    ) : boldStopIndex === primary_line.length ? (
+      <span>
+        <strong>{primary_line}, </strong>
+      </span>
+    ) : (
+      <span>
+        <strong>{primary_line.substring(0, boldStopIndex)}</strong>
+        {primary_line.substring(boldStopIndex)},{' '}
+      </span>
+    )
+
+  return (
+    <span>
+      {primaryLineElement}
+      <span className='lob-gray-text'>
+        {city}, {state.toUpperCase()}, {zip_code}
+      </span>
+    </span>
+  )
+  /* eslint-enable camelcase */
+}
+
 /**
  * Part of Lob's response body schema for US autocompletions
  * https://docs.lob.com/#section/Autocompletion-Test-Env
@@ -130,7 +172,7 @@ const Autocomplete = ({
 
         const newSuggestions = suggestions.map((x) => ({
           value: x,
-          label: `${x.primary_line} ${x.city} ${x.state}`
+          label: getOptionElement(x, inputValue)
         }))
 
         setAutocompleteResults([
