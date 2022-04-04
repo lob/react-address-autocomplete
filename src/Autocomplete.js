@@ -8,7 +8,8 @@ import './Autocomplete.css'
 import { postAutocompleteAddress } from './api'
 
 const LOB_LABEL = 'lob-label'
-const LOB_URL = 'https://www.lob.com/address-verification'
+const LOB_URL =
+  'https://www.lob.com/address-verification?utm_source=autocomplete&utm_medium=react'
 
 const LobLogo = ({ className }) => {
   return (
