@@ -36,26 +36,25 @@ describe('Autocomplete', () => {
     })
 
     // Verify suggestion renderings
-    expect(screen.getByText('123 Sesame St New York NY')).toBeVisible()
-    expect(
-      screen.getByText("123 Bowser's Castle Mushroom Kingdom JA")
-    ).toBeVisible()
-    expect(
-      screen.getByText("123 Micky's Clubhouse Disneyland FL")
-    ).toBeVisible()
+    expect(screen.getAllByText('123')).toHaveLength(4)
+    expect(screen.getByText('Sesame St,')).toBeVisible()
+    expect(screen.getByText('New York, NY, 12345')).toBeVisible()
+
+    expect(screen.getByText("Bowser's Castle,")).toBeVisible()
+    expect(screen.getByText('Mushroom Kingdom, JA, 12345')).toBeVisible()
+    expect(screen.getByText("Micky's Clubhouse,")).toBeVisible()
+    expect(screen.getByText('Disneyland, FL, 12345')).toBeVisible()
 
     // Simulate selection
     await act(async () => {
-      const suggestion = screen.getByText('123 Sesame St New York NY')
+      const suggestion = screen.getByText('Sesame St,')
       await fireEvent.click(suggestion)
     })
 
     // Verify correct suggestion is rendered
-    // expect(screen.getByText('123 Sesame St New York NY')).toBeVisible()
-    expect(screen.queryByText("123 Bowser's Castle Mushroom Kingdom JA")).toBe(
-      null
-    )
-    expect(screen.queryByText("123 Micky's Clubhouse Disneyland FL")).toBe(null)
+    expect(screen.getByText('123 Sesame St, New York, NY, 12345')).toBeDefined()
+    expect(screen.queryByText("Bowser's Castle")).toBe(null)
+    expect(screen.queryByText("Micky's Clubhouse")).toBe(null)
   })
 
   it('fires callback functions as expected', async () => {
@@ -86,20 +85,21 @@ describe('Autocomplete', () => {
 
     // Trigger selection
     await act(async () => {
-      const suggestion = screen.getByText('123 Sesame St New York NY')
+      const suggestion = screen.getByText('Sesame St,')
       await fireEvent.click(suggestion)
     })
 
     expect(handleSelection).toHaveBeenCalledTimes(1)
-    expect(handleSelection).toHaveBeenCalledWith({
-      label: '123 Sesame St New York NY',
-      value: {
-        city: 'New York',
-        primary_line: '123 Sesame St',
-        state: 'NY',
-        zip_code: '12345'
-      }
-    })
+    expect(handleSelection).toHaveBeenCalledWith(
+      expect.objectContaining({
+        value: {
+          city: 'New York',
+          primary_line: '123 Sesame St',
+          state: 'NY',
+          zip_code: '12345'
+        }
+      })
+    )
   })
 
   it('handles errors as expected', async () => {

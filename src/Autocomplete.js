@@ -77,7 +77,7 @@ const getOptionElement = (suggestion, inputValue) => {
     <span>
       {primaryLineElement}
       <span className='lob-gray-text'>
-        {city}, {state.toUpperCase()}, {zip_code}
+        {city},&nbsp;{state.toUpperCase()},&nbsp;{zip_code}
       </span>
     </span>
   )
@@ -204,6 +204,25 @@ const Autocomplete = ({
   }, [inputValue, delaySearch])
 
   /** Event handlers */
+  const updateInputValueFromOption = (option) => {
+    if (!option) {
+      setInputValue('')
+      return
+    }
+
+    /* eslint-disable camelcase */
+    const { primary_line, secondary_line, city, state, zip_code } = option.value
+
+    if (primaryLineOnly) {
+      setInputValue(primary_line)
+    } else {
+      const secondary = secondary_line ? ' ' + secondary_line : ''
+      setInputValue(
+        `${primary_line}${secondary}, ${city}, ${state}, ${zip_code}`
+      )
+    }
+    /* eslint-enable camelcase */
+  }
 
   // Fire when the user types into the input
   const handleInputChange = (newInputValue, { action }) => {
@@ -234,19 +253,14 @@ const Autocomplete = ({
       return
     }
 
-    if (primaryLineOnly) {
-      setInputValue(option ? option.value.primary_line : '')
-    } else {
-      setInputValue(option ? option.label : '')
-    }
-
-    setSelectValue(option)
+    updateInputValueFromOption(option)
     onSelection(option)
   }
 
   const handleSelect = (option) => {
     if (option.value !== LOB_LABEL) {
-      reactSelectProps.onSelect(option)
+      updateInputValueFromOption(option)
+      onSelection(option)
     }
   }
 

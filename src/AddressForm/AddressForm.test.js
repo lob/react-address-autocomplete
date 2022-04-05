@@ -33,17 +33,18 @@ describe('AddressForm', () => {
     })
 
     // Verify suggestion renderings
-    expect(screen.getByText('123 Sesame St New York NY')).toBeVisible()
-    expect(
-      screen.getByText("123 Bowser's Castle Mushroom Kingdom JA")
-    ).toBeVisible()
-    expect(
-      screen.getByText("123 Micky's Clubhouse Disneyland FL")
-    ).toBeVisible()
+    expect(screen.getAllByText('123')).toHaveLength(4)
+    expect(screen.getByText('Sesame St,')).toBeVisible()
+    expect(screen.getByText('New York, NY, 12345')).toBeVisible()
+
+    expect(screen.getByText("Bowser's Castle,")).toBeVisible()
+    expect(screen.getByText('Mushroom Kingdom, JA, 12345')).toBeVisible()
+    expect(screen.getByText("Micky's Clubhouse,")).toBeVisible()
+    expect(screen.getByText('Disneyland, FL, 12345')).toBeVisible()
 
     // Simulate selection
     await act(async () => {
-      const suggestion = screen.getByText('123 Sesame St New York NY')
+      const suggestion = screen.getByText('Sesame St,')
       await fireEvent.click(suggestion)
     })
 
