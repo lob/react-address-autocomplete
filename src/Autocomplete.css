@@ -1,0 +1,36 @@
+.lob-gray-text {
+  color: #888;
+  text-decoration: inherit;
+}
+
+.lob-label {
+  align-items: center;
+  border-bottom: 1px solid #DDDDDD;
+  cursor: pointer;
+  display: flex;
+  font-size: 17px;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.lob-label > a {
+  font-weight: 600;
+  color: #0699D6;
+  text-decoration: inherit;
+}
+
+.lob-label > span {
+  flex: 1;
+  font-weight: 400;
+  margin-left: 12px;
+}
+
+.lob-logo {
+  height: .9em;
+  margin-left: 1px;
+  margin-top: 3px;
+}
+
+.logo-large {
+  height: 21px;
+}
