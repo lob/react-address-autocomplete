@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Select, { components } from 'react-select'
 import throttle from 'lodash.throttle'
-import './Autocomplete.css'
+import styles from './Autocomplete.module.css'
 
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
@@ -28,16 +28,16 @@ const LobLogo = ({ className }) => {
 }
 
 const poweredByLob = () => (
-  <a href={LOB_URL} className='lob-gray-text'>
+  <a href={LOB_URL} className={styles.lobGrayText}>
     <span style={{ verticalAlign: 'top' }}>Powered by </span>
-    <LobLogo className='lob-logo' />
+    <LobLogo className={styles.lobLogo} />
   </a>
 )
 
 const getLobLabel = () => (
-  <div className={LOB_LABEL}>
-    <LobLogo className='logo-large' />
-    <span className='lob-gray-text'>Deliverable addresses</span>
+  <div className={styles.lobLabel}>
+    <LobLogo className={styles.logoLarge} />
+    <span className={styles.lobGrayText}>Deliverable addresses</span>
     <a href={LOB_URL}>Learn more</a>
   </div>
 )
@@ -76,7 +76,7 @@ const getOptionElement = (suggestion, inputValue) => {
   return (
     <span>
       {primaryLineElement}
-      <span className='lob-gray-text'>
+      <span className={styles.lobGrayText}>
         {city},&nbsp;{state.toUpperCase()},&nbsp;{zip_code}
       </span>
     </span>
