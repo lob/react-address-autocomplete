@@ -1,6 +1,6 @@
 {
   "name": "@lob/react-address-autocomplete",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "A collection of components and utility functions for verifying and suggesting addresses using Lob",
   "author": "Lob",
   "license": "MIT",
