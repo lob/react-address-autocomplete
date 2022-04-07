@@ -1,9 +1,9 @@
-.lob-gray-text {
+.lobGrayText {
   color: #888;
   text-decoration: inherit;
 }
 
-.lob-label {
+.lobLabel {
   align-items: center;
   border-bottom: 1px solid #DDDDDD;
   cursor: pointer;
@@ -13,24 +13,24 @@
   pointer-events: none;
 }
 
-.lob-label > a {
+.lobLabel > a {
   font-weight: 600;
   color: #0699D6;
   text-decoration: inherit;
 }
 
-.lob-label > span {
+.lobLabel > span {
   flex: 1;
   font-weight: 400;
   margin-left: 12px;
 }
 
-.lob-logo {
+.lobLogo {
   height: .9em;
   margin-left: 1px;
   margin-top: 3px;
 }
 
-.logo-large {
+.logoLarge {
   height: 21px;
 }
