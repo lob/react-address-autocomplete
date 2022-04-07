@@ -2,7 +2,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import Select, { components } from 'react-select'
 import throttle from 'lodash.throttle'
-import styles from './Autocomplete.module.css'
 
 // Internal Dependencies
 import { postAutocompleteAddress } from './api'
@@ -11,12 +10,49 @@ const LOB_LABEL = 'lob-label'
 const LOB_URL =
   'https://www.lob.com/address-verification?utm_source=autocomplete&utm_medium=react'
 
-const LobLogo = ({ className }) => {
+const lobGrayText = {
+  color: '#888',
+  textDecoration: 'inherit'
+}
+
+const lobLabel = {
+  alignItems: 'center',
+  borderBottom: '1px solid #DDDDDD',
+  cursor: 'pointer',
+  display: 'flex',
+  fontSize: '17px',
+  padding: '16px',
+  pointerEvents: 'none'
+}
+
+const lobLabelLink = {
+  fontWeight: 600,
+  color: '#0699D6',
+  textDecoration: 'inherit'
+}
+
+const lobLabelText = {
+  flex: 1,
+  fontWeight: 400,
+  marginLeft: '12px'
+}
+
+const lobLogo = {
+  height: '.9em',
+  marginLeft: '1px',
+  marginTop: '3px'
+}
+
+const logoLarge = {
+  height: '21px'
+}
+
+const LobLogo = ({ style }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
       viewBox='0 0 1259 602'
-      className={className}
+      style={style}
     >
       <path
         fill='#0099d7'
@@ -28,17 +64,21 @@ const LobLogo = ({ className }) => {
 }
 
 const poweredByLob = () => (
-  <a href={LOB_URL} className={styles.lobGrayText}>
+  <a href={LOB_URL} style={lobGrayText}>
     <span style={{ verticalAlign: 'top' }}>Powered by </span>
-    <LobLogo className={styles.lobLogo} />
+    <LobLogo style={lobLogo} />
   </a>
 )
 
 const getLobLabel = () => (
-  <div className={styles.lobLabel}>
-    <LobLogo className={styles.logoLarge} />
-    <span className={styles.lobGrayText}>Deliverable addresses</span>
-    <a href={LOB_URL}>Learn more</a>
+  <div style={lobLabel}>
+    <LobLogo style={logoLarge} />
+    <span style={{ ...lobGrayText, ...lobLabelText }}>
+      Deliverable addresses
+    </span>
+    <a style={lobLabelLink} href={LOB_URL}>
+      Learn more
+    </a>
   </div>
 )
 
@@ -76,7 +116,7 @@ const getOptionElement = (suggestion, inputValue) => {
   return (
     <span>
       {primaryLineElement}
-      <span className={styles.lobGrayText}>
+      <span style={lobGrayText}>
         {city},&nbsp;{state.toUpperCase()},&nbsp;{zip_code}
       </span>
     </span>
