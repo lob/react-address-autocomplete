@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@lob/react-address-autocomplete": "^1.0.5",
-    "cra-template": "1.1.2",
+    "@lob/react-address-autocomplete": "^1.0.0",
+    "cra-template": "1.1.2"
+  },
+  "peerDependencies": {
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "file:../node_modules/react-scripts",
-    "react-select": "^5.0.0"
+    "react-scripts": "5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
