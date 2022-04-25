@@ -26,8 +26,8 @@ const customStyles = {
  * @param {onSelection?} onSelection -
  *  Callback function when the select component changes.
  * @param {onInputChange?} onInputChange -
- *  Callback function when any input value changes. Use e.target.id to determine which component
- *  is being updated.
+ *  Callback function when any input value changes. Includes both the event object and address form.
+ *  Use event.target.id to determine which component is being updated.
  * @param {Object} styles - Override the default styles by providing an object similar to the
  *  styling framework used by react-select. Each key corresponds to a component and maps to a
  *  function that returns the new styles.lob_ Here is an example:
@@ -57,8 +57,28 @@ const AddressForm = ({
   const { primary_line, secondary_line, city, state, zip_code } = form
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.id]: e.target.value })
-    onFieldChange(e)
+    const newForm = { ...form, [e.target.id]: e.target.value }
+    setForm(newForm)
+    onFieldChange({
+      address: newForm,
+      event: e
+    })
+  }
+
+  const handleChangePrimaryLine = (newInputValue, { action }) => {
+    if (action === 'input-change') {
+      const newForm = { ...form, primary_line: newInputValue }
+      setForm(newForm)
+      onFieldChange({
+        address: newForm,
+        event: {
+          target: {
+            id: 'primary_line',
+            value: newInputValue
+          }
+        }
+      })
+    }
   }
 
   const handleSelect = (option) => {
@@ -66,10 +86,16 @@ const AddressForm = ({
     // have a secondary_line we clear it in the form.
     setForm({
       ...option.value,
-      secondary_line: option.value.secondary_line || ''
+      secondary_line: option.value.secondary_line || form.secondary_line || ''
     })
 
-    onSelection(option)
+    onSelection({
+      ...option,
+      value: {
+        ...option.value,
+        secondary_line: option.value.secondary_line || form.secondary_line || ''
+      }
+    })
   }
 
   const mergedStyles = useMergedStyles(styles, false /* isInternational */)
@@ -82,9 +108,11 @@ const AddressForm = ({
         </label>
         <Autocomplete
           apiKey={apiKey}
+          id='primary_line'
           inputId='primary_line'
           inputValue={primary_line}
           {...additionalProps}
+          onInputChange={handleChangePrimaryLine}
           // Below are properties that we don't let the user overwrite
           _addressComponentValues={{ city, state, zip_code }}
           onSelection={handleSelect}
