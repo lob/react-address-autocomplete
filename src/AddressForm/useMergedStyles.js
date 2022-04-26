@@ -26,7 +26,7 @@ let baseStyles = {
     marginBottom: '1em'
   }
 }
-
+// eslint-disable-next-line
 export default (userStyles, isInternational) => {
   const mergedStyles = {}
 
