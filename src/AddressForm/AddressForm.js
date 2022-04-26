@@ -108,7 +108,6 @@ const AddressForm = ({
         </label>
         <Autocomplete
           apiKey={apiKey}
-          id='primary_line'
           inputId='primary_line'
           inputValue={primary_line}
           {...additionalProps}

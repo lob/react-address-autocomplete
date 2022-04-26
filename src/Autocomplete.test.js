@@ -36,7 +36,7 @@ describe('Autocomplete', () => {
     })
 
     // Verify suggestion renderings
-    expect(screen.getAllByText('123')).toHaveLength(4)
+    expect(screen.getAllByText('123')).toHaveLength(3)
     expect(screen.getByText('Sesame St,')).toBeVisible()
     expect(screen.getByText('New York, NY, 12345')).toBeVisible()
 
@@ -52,7 +52,9 @@ describe('Autocomplete', () => {
     })
 
     // Verify correct suggestion is rendered
-    expect(screen.getByText('123 Sesame St, New York, NY, 12345')).toBeDefined()
+    expect(screen.getByRole('combobox')).toHaveValue(
+      '123 Sesame St, New York, NY, 12345'
+    )
     expect(screen.queryByText("Bowser's Castle")).toBe(null)
     expect(screen.queryByText("Micky's Clubhouse")).toBe(null)
   })
