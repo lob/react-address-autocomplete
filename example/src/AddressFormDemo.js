@@ -20,6 +20,11 @@ const AddressFormDemo = ({ apiKey }) => {
     setSelectedResult(selected)
   }
 
+  const handleChange = ({ address }) => {
+    setSelectedResult({ ...selectedResult, value: address })
+    resetApiResult()
+  }
+
   const handleSubmit = () =>
     resetApiResult()
       .then(() => verify(apiKey, selectedResult.value))
@@ -31,7 +36,7 @@ const AddressFormDemo = ({ apiKey }) => {
       <h2>Address Form</h2>
       <AddressForm
         apiKey={apiKey}
-        onFieldChange={resetApiResult}
+        onFieldChange={handleChange}
         onSelection={handleSelect}
       />
       <button

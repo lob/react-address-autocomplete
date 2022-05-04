@@ -42,8 +42,22 @@ export const verify = (apiKey, address) => {
     return Promise.reject(new Error('Missing API key'))
   }
 
+  let payloadAddress = address
+  // Check if the a single line address was passed as an object
+  if (typeof address === 'object') {
+    const componentsWithValue = Object.keys(address).filter(
+      (addressComponent) => address[addressComponent] !== ''
+    )
+    if (
+      componentsWithValue.length === 1 &&
+      componentsWithValue.includes('primary_line')
+    ) {
+      payloadAddress = address.primary_line
+    }
+  }
+
   // Send request to Lob and let user decide how to handle the response
-  return postVerifyAddress(apiKey, address).then(processApiResponse)
+  return postVerifyAddress(apiKey, payloadAddress).then(processApiResponse)
 }
 
 /**

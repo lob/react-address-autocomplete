@@ -33,7 +33,7 @@ describe('AddressForm', () => {
     })
 
     // Verify suggestion renderings
-    expect(screen.getAllByText('123')).toHaveLength(4)
+    expect(screen.getAllByText('123')).toHaveLength(3)
     expect(screen.getByText('Sesame St,')).toBeVisible()
     expect(screen.getByText('New York, NY, 12345')).toBeVisible()
 
