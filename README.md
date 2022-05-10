@@ -88,7 +88,7 @@ export default AddressFormDemo;
 
 ## Getting API Keys
 
-Head to [Lob.com](https://www.lob.com/) and create your account. Head to the dashboard and click on Address Verification Getting Started to find your API keys. It's reccomended to use your publishable Live key for front end components. Lob Autocomplete has free unlimited requests so you don't have to worry about any credit card charges :)
+Head to [Lob.com](https://www.lob.com/) and create your account. Head to the dashboard and click on Address Verification Getting Started to find your API keys. It's reccomended to use your publishable Live key for front end components. Likely you'll see an error mentioning that there is no verified payment method on hand. Unfortunately due to security reasons, we need a verified payment method on hand. Lob Autocomplete has free unlimited domestic requests so you don't have to worry about any credit card charges for requests about US addresses, however International autocomplete requests will be charged unfortunately. 
 
 ![Address Verification dashboard](./demo/imageedit_3_7790103450.png)
 
@@ -118,7 +118,7 @@ The `onSelect` prop is callback function that fires whenever an autocomplete sug
 
 ### Debounced Search requests
 
-Since Lob charges per request, you can set `delaySearch` to true which delays an API call until a user finishes typing in order to reduce API load if you want. Additionally you can set `debounceValue` to control how long to wait between calls in milliseconds.
+While Lob doesn't charge for requests, you can still set `delaySearch` to true which delays an API call until a user finishes typing in order to reduce API load. Additionally you can set `debounceValue` to control how long to wait between calls in milliseconds. This is 100% optional and everything will be functional without this on. 
 
 [Click here for more details about the props for each component](https://github.com/lob/react-address-autocomplete/wiki/React-Address-Autocomplete-Component-Props)
 
