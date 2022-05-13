@@ -51,26 +51,36 @@ const App = () => {
 
 ```jsx
 import React, { useState } from 'react';
-import { AddressForm } from '@lob/react-address-autocomplete'
+import { AddressForm, verify } from '@lob/react-address-autocomplete'
 
-const AddressFormDemo = ({ apiKey }) => {
-  const [selectedResult, setSelectedResult] = useState({})
+const API_KEY = 'YOUR API KEY HERE'
 
+const AddressFormDemo = () => {
+  const [address, setAddress] = useState({})
 
-  const handleSelect = (selected) => {
-    setSelectedResult(selected)
+  const handleFieldChange = (payload) => {
+    console.log(`${payload.event.target.id} Field Change`, payload)
+    setAddress(payload.address)
   }
 
-  const handleSubmit = () =>
-    // Set this to handle an actual button click
-    console.log(selectedResult)
+  const handleSelect = (selection) => {
+    console.log('Address Selection', selection)
+    setAddress(selection.value)
+  }
+
+  const handleSubmit = () => {
+    verify(API_KEY, address).then((verificationResult) => {
+      console.log('Verification Results', verificationResult)
+    })
+  }
 
   return (
     <div className="demoContainer">
       <h2>Address Form</h2>
       <AddressForm
-        apiKey={apiKey}
+        apiKey={API_KEY}
         onSelection={handleSelect}
+        onFieldChange={handleFieldChange}
       />
       <button
         onClick={handleSubmit}
