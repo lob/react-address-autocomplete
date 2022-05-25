@@ -24,7 +24,8 @@ const customStyles = {
  * Similar to Autocomplete except each address component is given its own input. Autocomplete
  * occurs on the primary line but the results are inserted into each component.
  * @param {String} apiKey - Public API key to your Lob account.
- * @param {Array?} children - The elements to render between the address form inputs and submit button
+ * @param {Array?} children - These elements get rendered between the address form inputs and
+ *  submit button
  * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
  * @param {Function} onInputChange - Callback when any input value changes. Includes both the event
  *  object and address form. Use event.target.id to determine which component is being updated.
@@ -108,24 +109,18 @@ const AddressForm = ({
   }
 
   const handleSubmit = () =>
-    verify(apiKey, form)
-    .then(verificationResult => {
+    verify(apiKey, form).then((verificationResult) => {
       const {
         primary_line,
         secondary_line,
-        components: {
-          city,
-          state,
-          zip_code,
-          zip_code_plus_4
-        }
+        components: { city, state, zip_code, zip_code_plus_4 }
       } = verificationResult
       setForm({
         primary_line,
         secondary_line,
         city,
         state,
-        zip_code: `${zip_code}-${zip_code_plus_4}`,
+        zip_code: `${zip_code}-${zip_code_plus_4}`
       })
       onSubmit(verificationResult)
     })
@@ -197,10 +192,7 @@ const AddressForm = ({
       </div>
       {children}
       {!hideSubmitButton && (
-        <button
-          onClick={handleSubmit}
-          style={mergedStyles.lob_submit}
-        >
+        <button onClick={handleSubmit} style={mergedStyles.lob_submit}>
           {submitButtonLabel}
         </button>
       )}

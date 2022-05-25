@@ -4,6 +4,7 @@
 import React, { useState } from 'react'
 
 // Internal Dependencies
+import { verify } from '../verify'
 import CountrySelect from '../CountrySelect'
 import useMergedStyles from './useMergedStyles'
 
@@ -19,7 +20,8 @@ const defaultForm = {
  * Renders a group of inputs for each address component including a select input for country code.
  * Does not perform any address autocompletion.
  * @param {String?} apiKey - Public API key to your Lob account.
- * @param {Array?} children - The elements to render between the address form inputs and submit button
+ * @param {Array?} children - These elements get rendered between the address form inputs and
+ *  submit button
  * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
  * @param {Function?} onInputChange - Callback when any input value changes. Use e.target.id
  *  to determine which component is being updated.
@@ -49,8 +51,9 @@ const AddressFormInternational = ({
   children,
   hideSubmitButton = false,
   onFieldChange = () => {},
+  onSubmit = () => {},
   styles = {},
-  submitButtonLabel = 'Submit',
+  submitButtonLabel = 'Submit'
 }) => {
   const [form, setForm] = useState(defaultForm)
   const { primary_line, secondary_line, city, state, zip_code, country } = form
@@ -64,31 +67,28 @@ const AddressFormInternational = ({
     // apiKey wasn't used is previous versions of AddressFormInternational so we made the prop
     // optional to not introduce a breaking change.
     if (!apiKey) {
-      console.error('[@lob/react-address-autocomplete] AddressFormInternational requires props apiKey for verifications')
+      console.error(
+        '[@lob/react-address-autocomplete] ' +
+        'AddressFormInternational requires props apiKey for verifications'
+      )
       return
     }
 
-    verify(apiKey, form)
-      .then(verificationResult => {
-        const {
-          primary_line,
-          secondary_line,
-          components: {
-            city,
-            state,
-            zip_code,
-            zip_code_plus_4
-          }
-        } = verificationResult
-        setForm({
-          primary_line,
-          secondary_line,
-          city,
-          state,
-          zip_code: `${zip_code}-${zip_code_plus_4}`,
-        })
-        onSubmit(verificationResult)
+    verify(apiKey, form).then((verificationResult) => {
+      const {
+        primary_line,
+        secondary_line,
+        components: { city, state, zip_code, zip_code_plus_4 }
+      } = verificationResult
+      setForm({
+        primary_line,
+        secondary_line,
+        city,
+        state,
+        zip_code: `${zip_code}-${zip_code_plus_4}`
       })
+      onSubmit(verificationResult)
+    })
   }
 
   const mergedStyles = useMergedStyles(styles, true /* isInternational */)
@@ -163,10 +163,7 @@ const AddressFormInternational = ({
       </div>
       {children}
       {!hideSubmitButton && (
-        <button
-          onClick={handleSubmit}
-          style={mergedStyles.lob_submit}
-        >
+        <button onClick={handleSubmit} style={mergedStyles.lob_submit}>
           {submitButtonLabel}
         </button>
       )}
