@@ -18,9 +18,13 @@ const defaultForm = {
 /**
  * Renders a group of inputs for each address component including a select input for country code.
  * Does not perform any address autocompletion.
- * @param {onInputChange?} onInputChange -
- *  Callback function when any input value changes. Use e.target.id to determine which component
- *  is being updated.
+ * @param {String?} apiKey - Public API key to your Lob account.
+ * @param {Array?} children - The elements to render between the address form inputs and submit button
+ * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
+ * @param {Function?} onInputChange - Callback when any input value changes. Use e.target.id
+ *  to determine which component is being updated.
+ * @param {Function?} onSubmit - Callback after the submit button is clicked and the form inputs
+ *  are updated. Passes the verification result from the API.
  * @param {Object} styles - Override the default styles by providing an object similar to the
  *  styling framework used by react-select. Each key corresponds to a component and maps to a
  *  function that returns the new styles.lob_ Here is an example:
@@ -38,10 +42,15 @@ const defaultForm = {
  *  - lob_row
  *
  *  For more details visit https://react-select.com/styles
+ * @param {String} submitButtonLabel
  */
 const AddressFormInternational = ({
+  apiKey = null,
+  children,
+  hideSubmitButton = false,
   onFieldChange = () => {},
-  styles = {}
+  styles = {},
+  submitButtonLabel = 'Submit',
 }) => {
   const [form, setForm] = useState(defaultForm)
   const { primary_line, secondary_line, city, state, zip_code, country } = form
@@ -49,6 +58,37 @@ const AddressFormInternational = ({
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value })
     onFieldChange(e)
+  }
+
+  const handleSubmit = () => {
+    // apiKey wasn't used is previous versions of AddressFormInternational so we made the prop
+    // optional to not introduce a breaking change.
+    if (!apiKey) {
+      console.error('[@lob/react-address-autocomplete] AddressFormInternational requires props apiKey for verifications')
+      return
+    }
+
+    verify(apiKey, form)
+      .then(verificationResult => {
+        const {
+          primary_line,
+          secondary_line,
+          components: {
+            city,
+            state,
+            zip_code,
+            zip_code_plus_4
+          }
+        } = verificationResult
+        setForm({
+          primary_line,
+          secondary_line,
+          city,
+          state,
+          zip_code: `${zip_code}-${zip_code_plus_4}`,
+        })
+        onSubmit(verificationResult)
+      })
   }
 
   const mergedStyles = useMergedStyles(styles, true /* isInternational */)
@@ -121,6 +161,15 @@ const AddressFormInternational = ({
           value={country}
         />
       </div>
+      {children}
+      {!hideSubmitButton && (
+        <button
+          onClick={handleSubmit}
+          style={mergedStyles.lob_submit}
+        >
+          {submitButtonLabel}
+        </button>
+      )}
     </div>
   )
 }

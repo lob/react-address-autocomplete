@@ -26,14 +26,11 @@ const customStyles = {
  * @param {String} apiKey - Public API key to your Lob account.
  * @param {Array?} children - The elements to render between the address form inputs and submit button
  * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
- * @param {Function} onInputChange -
- *  Callback when any input value changes. Includes both the event object and address form.
- *  Use event.target.id to determine which component is being updated.
- * @param {Function} onSelection -
- *  Callback when the select component changes.
- * @param {Function} onSubmit -
- *  Callback after the submit button is clicked and the form inputs are updated. Passes the
- *  verification result from the API.
+ * @param {Function} onInputChange - Callback when any input value changes. Includes both the event
+ *  object and address form. Use event.target.id to determine which component is being updated.
+ * @param {Function} onSelection - Callback when the select component changes.
+ * @param {Function} onSubmit - Callback after the submit button is clicked and the form inputs
+ *  are updated. Passes the verification result from the API.
  * @param {Object} styles - Override the default styles by providing an object similar to the
  *  styling framework used by react-select. Each key corresponds to a component and maps to a
  *  function that returns the new styles.lob_ Here is an example:
@@ -52,7 +49,7 @@ const customStyles = {
  *  - lob_submit
  *
  *  For more details visit https://react-select.com/styles
- * @param {Node} submitButton -
+ * @param {String} submitButtonLabel
  */
 const AddressForm = ({
   apiKey,
@@ -62,6 +59,7 @@ const AddressForm = ({
   onSelection = () => {},
   onSubmit = () => {},
   styles = {},
+  submitButtonLabel = 'Submit',
   ...additionalProps
 }) => {
   const [form, setForm] = useState(defaultForm)
@@ -198,12 +196,14 @@ const AddressForm = ({
         />
       </div>
       {children}
-      <button
-        onClick={handleSubmit}
-        style={mergedStyles.lob_submit}
-      >
-        Verify
-      </button>
+      {!hideSubmitButton && (
+        <button
+          onClick={handleSubmit}
+          style={mergedStyles.lob_submit}
+        >
+          {submitButtonLabel}
+        </button>
+      )}
     </div>
   )
 }
