@@ -22,8 +22,7 @@ const processApiResponse = (apiResponse) =>
  * @param {string} zip_code
  */
 
-
-const validateArguments = (apiKey, address, countryCode = null) => {
+const validateArguments = (apiKey, address, countryCode, isInternational) => {
   if (!Object.keys(address || {}).length) {
     return new Error('Empty address was passed to verify function')
   }
@@ -32,7 +31,7 @@ const validateArguments = (apiKey, address, countryCode = null) => {
     return new Error('Missing API key')
   }
 
-  if (countryCode) {
+  if (isInternational) {
     if (typeof countryCode !== 'string') {
       return new Error('Expected countryCode to be of type string')
     }
@@ -55,7 +54,7 @@ const validateArguments = (apiKey, address, countryCode = null) => {
  *  https://docs.lob.com/#operation/us_verification
  */
 export const verify = (apiKey, address) => {
-  const error = validateArguments(apiKey, address)
+  const error = validateArguments(apiKey, address, null, false)
   if (error) {
     return Promise.reject(error)
   }
@@ -87,7 +86,8 @@ export const verify = (apiKey, address) => {
  *  https://docs.lob.com/#operation/us_verification
  */
 export const verifyInternational = (apiKey, address, countryCode) => {
-  const error = validateArguments(apiKey, address, countryCode)
+  const error = validateArguments(apiKey, address, countryCode, true)
+
   if (error) {
     return Promise.reject(error)
   }

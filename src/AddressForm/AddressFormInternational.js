@@ -56,7 +56,8 @@ const AddressFormInternational = ({
   submitButtonLabel = 'Submit'
 }) => {
   const [form, setForm] = useState(defaultForm)
-  const { primary_line, secondary_line, city, state, postal_code, country } = form
+  const { primary_line, secondary_line, city, state, postal_code, country } =
+    form
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value })
@@ -69,26 +70,28 @@ const AddressFormInternational = ({
     if (!apiKey) {
       console.error(
         '[@lob/react-address-autocomplete] ' +
-        'AddressFormInternational requires props apiKey for verifications'
+          'AddressFormInternational requires props apiKey for verifications'
       )
       return
     }
 
-    verifyInternational(apiKey, form, form.country).then((verificationResult) => {
-      const {
-        primary_line,
-        secondary_line,
-        components: { city, state, postal_code }
-      } = verificationResult
-      setForm({
-        primary_line,
-        secondary_line,
-        city,
-        state,
-        postal_code
-      })
-      onSubmit(verificationResult)
-    })
+    verifyInternational(apiKey, form, form.country).then(
+      (verificationResult) => {
+        const {
+          primary_line,
+          secondary_line,
+          components: { city, state, postal_code }
+        } = verificationResult
+        setForm({
+          primary_line,
+          secondary_line,
+          city,
+          state,
+          postal_code
+        })
+        onSubmit(verificationResult)
+      }
+    )
   }
 
   const mergedStyles = useMergedStyles(styles, true /* isInternational */)
