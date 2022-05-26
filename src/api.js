@@ -48,6 +48,7 @@ export const postVerifyInternationalAddress = (
   address,
   countryCode
 ) => {
+  const payload = typeof address === 'string' ? { address } : address
   const url = new URL('https://api.lob.com/v1/intl_verifications')
   url.searchParams.append('av_integration_origin', window.location.href)
   url.searchParams.append('integration', 'react-address-autocomplete')
@@ -57,7 +58,7 @@ export const postVerifyInternationalAddress = (
       Authorization: `Basic ${base64.encode(apiKey + ':')}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ address, country: countryCode })
+    body: JSON.stringify({ ...payload, country: countryCode })
   }
 
   return fetch(url, init)

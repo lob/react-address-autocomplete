@@ -4,7 +4,7 @@
 import React, { useState } from 'react'
 
 // Internal Dependencies
-import { verify } from '../verify'
+import { verifyInternational } from '../verify'
 import CountrySelect from '../CountrySelect'
 import useMergedStyles from './useMergedStyles'
 
@@ -13,7 +13,7 @@ const defaultForm = {
   secondary_line: '',
   city: '',
   state: '',
-  zip_code: ''
+  postal_code: ''
 }
 
 /**
@@ -23,7 +23,7 @@ const defaultForm = {
  * @param {Array?} children - These elements get rendered between the address form inputs and
  *  submit button
  * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
- * @param {Function?} onInputChange - Callback when any input value changes. Use e.target.id
+ * @param {Function?} onFieldChange - Callback when any input value changes. Use e.target.id
  *  to determine which component is being updated.
  * @param {Function?} onSubmit - Callback after the submit button is clicked and the form inputs
  *  are updated. Passes the verification result from the API.
@@ -56,7 +56,7 @@ const AddressFormInternational = ({
   submitButtonLabel = 'Submit'
 }) => {
   const [form, setForm] = useState(defaultForm)
-  const { primary_line, secondary_line, city, state, zip_code, country } = form
+  const { primary_line, secondary_line, city, state, postal_code, country } = form
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value })
@@ -74,18 +74,18 @@ const AddressFormInternational = ({
       return
     }
 
-    verify(apiKey, form).then((verificationResult) => {
+    verifyInternational(apiKey, form, form.country).then((verificationResult) => {
       const {
         primary_line,
         secondary_line,
-        components: { city, state, zip_code, zip_code_plus_4 }
+        components: { city, state, postal_code }
       } = verificationResult
       setForm({
         primary_line,
         secondary_line,
         city,
         state,
-        zip_code: `${zip_code}-${zip_code_plus_4}`
+        postal_code
       })
       onSubmit(verificationResult)
     })
@@ -140,14 +140,14 @@ const AddressFormInternational = ({
         />
       </div>
       <div style={mergedStyles.lob_row}>
-        <label style={mergedStyles.lob_label} htmlFor='zip_code'>
+        <label style={mergedStyles.lob_label} htmlFor='postal_code'>
           Zip / Postal Code
         </label>
         <input
           style={{ ...mergedStyles.lob_input }}
-          id='zip_code'
+          id='postal_code'
           onChange={handleChange}
-          value={zip_code}
+          value={postal_code}
         />
       </div>
       <div style={mergedStyles.lob_row}>

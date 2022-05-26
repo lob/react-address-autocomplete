@@ -6,7 +6,7 @@ import AddressFormDemo from './AddressFormDemo'
 // import DomesticDemo from './DomesticDemo'
 // import InternationalDemo from './InternationalDemo'
 
-const API_KEY = 'live_pub_16d30adbb46a1c360ebf7d1e6b48361'
+const API_KEY = 'YOUR_API_KEY_HERE'
 
 const App = () => {
 
@@ -18,8 +18,8 @@ const App = () => {
         alt='Lob'
       />
       <h1>React Address Autocomplete Demo</h1>
-      {/* <DomesticDemo apiKey={API_KEY} />
-      <InternationalDemo apiKey={API_KEY} /> */}
+      {/* <DomesticDemo apiKey={API_KEY} /> */}
+      {/* <InternationalDemo apiKey={API_KEY} /> */}
       <AddressFormDemo apiKey={API_KEY} />
     </div>
   );
