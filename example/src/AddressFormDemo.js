@@ -1,6 +1,6 @@
 // External Dependencies
 import React, { useState } from 'react';
-import { AddressForm, verify } from '@lob/react-address-autocomplete'
+import { AddressForm } from '@lob/react-address-autocomplete'
 
 // Internal Dependencies
 import VerificationResult from './VerificationResult'
@@ -25,10 +25,9 @@ const AddressFormDemo = ({ apiKey }) => {
     resetApiResult()
   }
 
-  const handleSubmit = () =>
+  const handleSubmit = verificationResult =>
     resetApiResult()
-      .then(() => verify(apiKey, selectedResult.value))
-      .then(res => setVerificationResult(res))
+      .then(() => setVerificationResult(verificationResult))
       .catch(err => setErrorMessage(err.message))
 
   return (
@@ -38,13 +37,12 @@ const AddressFormDemo = ({ apiKey }) => {
         apiKey={apiKey}
         onFieldChange={handleChange}
         onSelection={handleSelect}
+        onSubmit={handleSubmit}
+        submitLabel="Verify"
+        styles={{
+          'lob-submit': { width: '100%' }
+        }}
       />
-      <button
-        onClick={handleSubmit}
-        style={{ width: '100%' }}
-      >
-        Verify
-      </button>
       <VerificationResult apiResponse={verificationResult} error={errorMessage} />
     </div>
   );

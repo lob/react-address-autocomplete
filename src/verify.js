@@ -22,6 +22,29 @@ const processApiResponse = (apiResponse) =>
  * @param {string} zip_code
  */
 
+const validateArguments = (apiKey, address, countryCode, isInternational) => {
+  if (!Object.keys(address || {}).length) {
+    return new Error('Empty address was passed to verify function')
+  }
+
+  if (!apiKey.length) {
+    return new Error('Missing API key')
+  }
+
+  if (isInternational) {
+    if (typeof countryCode !== 'string') {
+      return new Error('Expected countryCode to be of type string')
+    }
+    if (/[A-Z]{2}/.test(countryCode) === false) {
+      return new Error(
+        'countryCode must be a 2 letter country short-name code (ISO 3166)'
+      )
+    }
+  }
+
+  return null
+}
+
 /**
  * Checks the deliverability of a given address and provides meta data such as geo coordinates,
  * county, building type, etc.
@@ -31,15 +54,9 @@ const processApiResponse = (apiResponse) =>
  *  https://docs.lob.com/#operation/us_verification
  */
 export const verify = (apiKey, address) => {
-  // Validate arguments
-  if (!Object.keys(address || {}).length) {
-    return Promise.reject(
-      new Error('Empty address was passed to verify function')
-    )
-  }
-
-  if (!apiKey.length) {
-    return Promise.reject(new Error('Missing API key'))
+  const error = validateArguments(apiKey, address, null, false)
+  if (error) {
+    return Promise.reject(error)
   }
 
   let payloadAddress = address
@@ -69,29 +86,10 @@ export const verify = (apiKey, address) => {
  *  https://docs.lob.com/#operation/us_verification
  */
 export const verifyInternational = (apiKey, address, countryCode) => {
-  // Validate arguments
-  if (!Object.keys(address || {}).length) {
-    return Promise.reject(
-      new Error('Empty address was passed to verify function')
-    )
-  }
+  const error = validateArguments(apiKey, address, countryCode, true)
 
-  if (!apiKey.length) {
-    return Promise.reject(new Error('Missing API key'))
-  }
-
-  if (typeof countryCode !== 'string') {
-    return Promise.reject(
-      new Error('Expected countryCode to be of type string')
-    )
-  }
-
-  if (/[A-Z]{2}/.test(countryCode) === false) {
-    return Promise.reject(
-      new Error(
-        'countryCode must be a 2 letter country short-name code (ISO 3166)'
-      )
-    )
+  if (error) {
+    return Promise.reject(error)
   }
 
   // Send request to Lob and let user decide how to handle the response

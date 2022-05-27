@@ -4,6 +4,7 @@
 import React, { useState } from 'react'
 
 // Internal Dependencies
+import { verify } from '../verify'
 import Autocomplete from '../Autocomplete'
 import useMergedStyles from './useMergedStyles'
 
@@ -22,12 +23,15 @@ const customStyles = {
 /**
  * Similar to Autocomplete except each address component is given its own input. Autocomplete
  * occurs on the primary line but the results are inserted into each component.
- * @param {string} apiKey - Public API key to your Lob account.
- * @param {onSelection?} onSelection -
- *  Callback function when the select component changes.
- * @param {onInputChange?} onInputChange -
- *  Callback function when any input value changes. Includes both the event object and address form.
- *  Use event.target.id to determine which component is being updated.
+ * @param {String} apiKey - Public API key to your Lob account.
+ * @param {Array?} children - These elements get rendered between the address form inputs and
+ *  submit button
+ * @param {Boolean} hideSubmitButton - Hides the submit button and its behavior
+ * @param {Function} onInputChange - Callback when any input value changes. Includes both the event
+ *  object and address form. Use event.target.id to determine which component is being updated.
+ * @param {Function} onSelection - Callback when the select component changes.
+ * @param {Function} onSubmit - Callback after the submit button is clicked and the form inputs
+ *  are updated. Passes the verification result from the API.
  * @param {Object} styles - Override the default styles by providing an object similar to the
  *  styling framework used by react-select. Each key corresponds to a component and maps to a
  *  function that returns the new styles.lob_ Here is an example:
@@ -43,14 +47,20 @@ const customStyles = {
  *  - lob_input
  *  - lob_label
  *  - lob_row
+ *  - lob_submit
  *
  *  For more details visit https://react-select.com/styles
+ * @param {String} submitButtonLabel
  */
 const AddressForm = ({
   apiKey,
+  children,
+  hideSubmitButton = false,
   onFieldChange = () => {},
   onSelection = () => {},
+  onSubmit = () => {},
   styles = {},
+  submitButtonLabel = 'Submit',
   ...additionalProps
 }) => {
   const [form, setForm] = useState(defaultForm)
@@ -97,6 +107,23 @@ const AddressForm = ({
       }
     })
   }
+
+  const handleSubmit = () =>
+    verify(apiKey, form).then((verificationResult) => {
+      const {
+        primary_line,
+        secondary_line,
+        components: { city, state, zip_code, zip_code_plus_4 }
+      } = verificationResult
+      setForm({
+        primary_line,
+        secondary_line,
+        city,
+        state,
+        zip_code: `${zip_code}-${zip_code_plus_4}`
+      })
+      onSubmit(verificationResult)
+    })
 
   const mergedStyles = useMergedStyles(styles, false /* isInternational */)
 
@@ -163,6 +190,12 @@ const AddressForm = ({
           value={zip_code}
         />
       </div>
+      {children}
+      {!hideSubmitButton && (
+        <button onClick={handleSubmit} style={mergedStyles.lob_submit}>
+          {submitButtonLabel}
+        </button>
+      )}
     </div>
   )
 }
