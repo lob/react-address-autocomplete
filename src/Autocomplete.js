@@ -270,7 +270,7 @@ const Autocomplete = ({
     //https://github.com/lob/react-address-autocomplete/issues/20
     //Realistically we don't need this at all but I'll leave it in for the future
     if (action === 'input-blur') {
-      return;
+      return
     }
     // onInputChange => update inputValue
     else if (action === 'input-change') {
