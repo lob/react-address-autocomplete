@@ -267,10 +267,10 @@ const Autocomplete = ({
 
   // Fire when the user types into the input
   const handleInputChange = (newInputValue, { action }) => {
-    // `onBlur => setInputValue to last selected value
+    //https://github.com/lob/react-address-autocomplete/issues/20
+    //Realistically we don't need this at all but I'll leave it in for the future
     if (action === 'input-blur') {
-      // First check is user is controlling input value. If so we use it like for AddressForm
-      setInputValue(inputValue || (selectValue ? selectValue.label : ''))
+      return;
     }
     // onInputChange => update inputValue
     else if (action === 'input-change') {
