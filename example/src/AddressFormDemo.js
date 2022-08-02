@@ -39,6 +39,7 @@ const AddressFormDemo = ({ apiKey }) => {
         onSelection={handleSelect}
         onSubmit={handleSubmit}
         submitLabel="Verify"
+        disableLobLogo={true}
         styles={{
           'lob-submit': { width: '100%' }
         }}

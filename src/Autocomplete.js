@@ -184,13 +184,15 @@ const Input = (props) => <components.Input {...props} isHidden={false} />
  *  Callback function when the input value changes.
  * @param {onError?} onError - Callback function when we receive an API error.
  * @param {boolean} primaryLineOnly - When true, applying a suggestion updates the value of our
+ * @param {boolean} disableLobLogo - When true, disables the Lob logo.
  *  select component with only the primary line of the address instead of the complete address.
  */
 const Autocomplete = ({
   addressComponentValues = {},
   apiKey,
-  delaySearch = true,
+  delaySearch = false,
   delayValue = 800,
+  disableLobLogo = true,
   onSelection = () => {},
   onError = () => {},
   onInputChange = () => {},
@@ -331,7 +333,7 @@ const Autocomplete = ({
       inputValue={inputValue}
       options={autocompleteResults}
       controlShouldRenderValue={false}
-      noOptionsMessage={poweredByLob}
+      noOptionsMessage={!disableLobLogo ? poweredByLob : () => <div></div> }
       placeholder='Start typing an address...'
       value={selectValue}
       {...reactSelectProps}
