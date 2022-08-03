@@ -333,7 +333,7 @@ const Autocomplete = ({
       inputValue={inputValue}
       options={autocompleteResults}
       controlShouldRenderValue={false}
-      noOptionsMessage={!disableLobLogo ? poweredByLob : () => <div></div> }
+      noOptionsMessage={!disableLobLogo ? poweredByLob : () => <div></div>}
       placeholder='Start typing an address...'
       value={selectValue}
       {...reactSelectProps}

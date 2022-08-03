@@ -16,7 +16,7 @@ global.fetch = mockPost
 describe('Autocomplete', () => {
   it('renders correctly', async () => {
     // Mock fetch response
-    mockPost.mockReturnValueOnce(
+    mockPost.mockReturnValue(
       Promise.resolve({
         json: () => mockAutocompleteSuccessResponse
       })
@@ -61,7 +61,7 @@ describe('Autocomplete', () => {
 
   it('fires callback functions as expected', async () => {
     // Mock fetch response
-    mockPost.mockReturnValueOnce(
+    mockPost.mockReturnValue(
       Promise.resolve({
         json: () => mockAutocompleteSuccessResponse
       })
@@ -106,7 +106,7 @@ describe('Autocomplete', () => {
 
   it('handles errors as expected', async () => {
     // Mock fetch response
-    mockPost.mockReturnValueOnce(
+    mockPost.mockReturnValue(
       Promise.resolve({
         json: () => mockAutocompleteFailureResponse
       })
