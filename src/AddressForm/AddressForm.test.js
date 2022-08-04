@@ -13,7 +13,7 @@ global.fetch = mockPost
 describe('AddressForm', () => {
   it('renders correctly', async () => {
     // Mock fetch response
-    mockPost.mockReturnValueOnce(
+    mockPost.mockReturnValue(
       Promise.resolve({
         json: () => mockAutocompleteSuccessResponse
       })
