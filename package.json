@@ -9,7 +9,7 @@
     "source": "src/index.js",
     "engines": {
         "node": ">=20",
-        "npm": ">=11.5.1"
+        "npm": ">=11.12.1"
     },
     "scripts": {
         "build": "microbundle-crl --no-compress --format modern,cjs --css inline",
