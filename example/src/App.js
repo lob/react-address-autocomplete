@@ -6,7 +6,7 @@ import AddressFormDemo from './AddressFormDemo'
 // import DomesticDemo from './DomesticDemo'
 // import InternationalDemo from './InternationalDemo'
 
-const API_KEY = 'YOUR_API_KEY_HERE'
+const API_KEY = process.env.REACT_APP_LOB_API_KEY || 'YOUR_API_KEY_HERE'
 
 const App = () => {
 

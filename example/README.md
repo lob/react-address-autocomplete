@@ -2,6 +2,16 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Lob API key
+
+`App.js` reads the key from `process.env.REACT_APP_LOB_API_KEY`, falling back to the `YOUR_API_KEY_HERE` placeholder. Create `example/.env.local` (already gitignored) with:
+
+```
+REACT_APP_LOB_API_KEY=test_your_lob_test_key_here
+```
+
+Use a Lob **test** key (prefixed `test_`), not a live key — `api.lob.com` is the only endpoint this package calls, and Lob distinguishes test vs. live by key prefix rather than by hostname. Restart `npm start` after adding or changing the file; CRA only reads `.env*` files at startup.
+
 ## Local Development with @lob/react-address-autocomplete
 
 The source code for @lob/react-address-autocomplete is stored at the parent level of this demo project. In order to use it instead of the version in npm run the following:
