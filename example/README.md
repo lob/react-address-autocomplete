@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Lob API key
 
-Set `REACT_APP_LOB_API_KEY` in `.env.local` to a Lob test key.
+Set `REACT_APP_LOB_API_KEY` in `.env.local` to a Lob test key. Requests go to `api.lob.com`.
 
 ## Local Development with @lob/react-address-autocomplete
 
