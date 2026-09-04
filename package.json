@@ -53,6 +53,9 @@
         "prettier": "^2.7.1",
         "tsup": "^8.5.1"
     },
+    "overrides": {
+        "typescript": "~5.4.5"
+    },
     "keywords": [
         "address autocomplete",
         "address verification",
