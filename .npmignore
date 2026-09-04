@@ -1,0 +1,25 @@
+# See .gitignore for build artifacts and local files already excluded by npm's defaults.
+
+# demo/docs assets, not needed at runtime (README images render from GitHub, not the tarball)
+demo/
+public/
+
+# example app, not part of the published package
+example/
+
+# dev tooling and config
+.claude/
+.github/
+.editorconfig
+.eslintignore
+.eslintrc
+.node-version
+.prettierrc
+babel.config.js
+jest.config.js
+tsup.config.js
+
+# tests
+src/**/*.test.js
+src/setupTests.js
+src/mockApi.js

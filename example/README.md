@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Lob API key
+
+Set `REACT_APP_LOB_API_KEY` in `.env.local` to a Lob test key. Requests go to `api.lob.com`.
+
 ## Local Development with @lob/react-address-autocomplete
 
 The source code for @lob/react-address-autocomplete is stored at the parent level of this demo project. In order to use it instead of the version in npm run the following:
