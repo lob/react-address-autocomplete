@@ -11,13 +11,12 @@ example/
 .claude/
 .github/
 .editorconfig
-.eslintignore
-.eslintrc
+eslint.config.mjs
 .node-version
 .prettierrc
 babel.config.js
 jest.config.js
-tsup.config.js
+build.mjs
 
 # tests
 src/**/*.test.js

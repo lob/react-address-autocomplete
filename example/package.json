@@ -16,14 +16,6 @@
         "start": "vite",
         "build": "vite build"
     },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest",
-            "eslint:recommended",
-            "plugin:jest/recommended"
-        ]
-    },
     "devDependencies": {
         "@vitejs/plugin-react": "^6.1.1",
         "vite": "^8.3.0"
