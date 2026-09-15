@@ -15,10 +15,10 @@
         "build": "tsup",
         "start": "tsup --watch",
         "prepare": "run-s build",
-        "lint:fix": "eslint . --fix",
+        "lint:fix": "eslint . --ext .js,.jsx,.mjs --fix",
         "test": "run-s test:unit test:lint test:build",
         "test:build": "run-s build",
-        "test:lint": "eslint .",
+        "test:lint": "eslint . --ext .js,.jsx,.mjs",
         "test:unit": "CI=1 jest",
         "test:watch": "jest --watch"
     },
@@ -54,7 +54,10 @@
         "tsup": "^8.5.1"
     },
     "overrides": {
-        "typescript": "~5.4.5"
+        "typescript": "~5.4.5",
+        "tsup": {
+            "esbuild": "^0.28.1"
+        }
     },
     "keywords": [
         "address autocomplete",

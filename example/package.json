@@ -2,20 +2,19 @@
     "name": "react-address-autocomplete-example",
     "version": "0.1.0",
     "private": true,
+    "engines": {
+        "node": "^20.19.0 || >=22.12.0"
+    },
     "dependencies": {
-        "@lob/react-address-autocomplete": "^2.0.0",
-        "cra-template": "1.1.2"
+        "@lob/react-address-autocomplete": "^2.0.0"
     },
     "peerDependencies": {
         "react": "file:../node_modules/react",
-        "react-dom": "file:../node_modules/react-dom",
-        "react-scripts": "5.0.0"
+        "react-dom": "file:../node_modules/react-dom"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "start": "vite",
+        "build": "vite build"
     },
     "eslintConfig": {
         "extends": [
@@ -25,22 +24,8 @@
             "plugin:jest/recommended"
         ]
     },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
     "devDependencies": {
-        "eslint-config-react": "^1.1.7",
-        "eslint-config-react-app": "^6.0.0",
-        "eslint-plugin-jest": "24.7.0",
-        "eslint-plugin-testing-library": "3.10.2"
+        "@vitejs/plugin-react": "^6.1.1",
+        "vite": "^8.3.0"
     }
 }
