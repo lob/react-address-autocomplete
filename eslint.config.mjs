@@ -218,6 +218,37 @@ const sharedRules = {
   'react-hooks/rules-of-hooks': 'error'
 }
 
+// Testing Library removed this rule in v6; preserve the example test check.
+const noWaitForEmptyCallback = {
+  meta: { type: 'suggestion', schema: [] },
+  create(context) {
+    return {
+      'CallExpression[callee.name=/^(waitFor|waitForElementToBeRemoved)$/]'(
+        node
+      ) {
+        for (const argument of node.arguments) {
+          const emptyCallback =
+            (argument.type === 'ArrowFunctionExpression' ||
+              argument.type === 'FunctionExpression') &&
+            argument.body.type === 'BlockStatement' &&
+            argument.body.body.length === 0
+          const noopCallback =
+            argument.type === 'Identifier' && argument.name === 'noop'
+
+          if (emptyCallback || noopCallback) {
+            context.report({
+              node: argument,
+              message:
+                'Avoid passing an empty callback to {{method}}. Insert an assertion instead.',
+              data: { method: node.callee.name }
+            })
+          }
+        }
+      }
+    }
+  }
+}
+
 const eslintConfig = [
   {
     ignores: [
@@ -287,8 +318,14 @@ const eslintConfig = [
       'example/**/*.{test,spec}.{js,jsx}',
       'example/**/__tests__/**/*.{js,jsx}'
     ],
-    plugins: { 'testing-library': testingLibrary },
-    rules: testingLibrary.configs['flat/react'].rules
+    plugins: {
+      'testing-library': testingLibrary,
+      local: { rules: { 'no-wait-for-empty-callback': noWaitForEmptyCallback } }
+    },
+    rules: {
+      ...testingLibrary.configs['flat/react'].rules,
+      'local/no-wait-for-empty-callback': 'error'
+    }
   },
   {
     files: ['**/*.mjs'],
