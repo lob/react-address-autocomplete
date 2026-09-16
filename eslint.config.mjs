@@ -11,6 +11,10 @@ import prettierConfig from 'eslint-config-prettier'
 
 // Preserve the JavaScript checks previously supplied by eslint-config-react-app.
 const sharedRules = {
+  'no-constant-binary-expression': 'error',
+  'no-empty-static-block': 'error',
+  'no-new-native-nonconstructor': 'error',
+  'no-unused-private-class-members': 'error',
   'react/jsx-uses-vars': 'warn',
   'react/jsx-uses-react': 'warn',
   'array-callback-return': 'warn',
@@ -263,7 +267,7 @@ const eslintConfig = [
   {
     files: ['**/*.{js,jsx,mjs}'],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest',
       sourceType: 'module',
       parserOptions: { ecmaFeatures: { jsx: true } },
       globals: { ...globals.browser, ...globals.node, ...globals.jest }
@@ -315,21 +319,26 @@ const eslintConfig = [
   },
   {
     files: [
-      'example/**/*.{test,spec}.{js,jsx}',
-      'example/**/__tests__/**/*.{js,jsx}'
+      'example/**/*.{test,spec}.{js,jsx,mjs}',
+      'example/**/__tests__/**/*.{js,jsx,mjs}'
     ],
+    settings: {
+      'testing-library/utils-module': 'off',
+      'testing-library/custom-renders': 'off',
+      'testing-library/custom-queries': 'off'
+    },
     plugins: {
       'testing-library': testingLibrary,
       local: { rules: { 'no-wait-for-empty-callback': noWaitForEmptyCallback } }
     },
     rules: {
-      ...testingLibrary.configs['flat/react'].rules,
+      'testing-library/await-async-queries': 'error',
+      'testing-library/await-async-utils': 'error',
+      'testing-library/no-await-sync-queries': 'warn',
+      'testing-library/no-dom-import': ['error', 'react'],
+      'testing-library/no-wait-for-snapshot': 'error',
       'local/no-wait-for-empty-callback': 'error'
     }
-  },
-  {
-    files: ['**/*.mjs'],
-    languageOptions: { ecmaVersion: 'latest' }
   }
 ]
 
