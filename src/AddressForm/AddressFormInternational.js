@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 // External Dependencies
 import React, { useState } from 'react'
 

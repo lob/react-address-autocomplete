@@ -56,7 +56,6 @@ const LobLogo = ({ style }) => {
     >
       <path
         fill='#0099d7'
-        // eslint-disable-next-line
         d='M1063,141c-47.06,0-89,18.33-121,50.78V0H780V338.74C765,222.53,666.88,138,540,138c-137,0-242,101-242,232a235,235,0,0,0,7.7,60H164V0H0V585H307l14.54-112.68C359.94,550,441.74,602,540,602c127.75,0,225.08-83.62,240-200.41V585H930V540.27c31.8,37,77.27,56.73,133,56.73,103,0,196-109,196-228C1259,239,1175,141,1063,141ZM540,450c-45,0-81-36-81-80s36-80,81-80c46,0,81,35,81,80S585,450,540,450Zm475-1c-46,0-83-36-83-80a82.8,82.8,0,0,1,82.6-83h.4c47,0,85,37,85,83C1100,413,1062,449,1015,449Z'
       />
     </svg>
@@ -85,7 +84,6 @@ const getLobLabel = () => (
 // Highlight the users input in the primary line by comparing char by char. We only check the
 // primary line for simplicity sake
 const getOptionElement = (suggestion, inputValue) => {
-  /* eslint-disable camelcase */
   const { primary_line, city, state, zip_code } = suggestion
 
   let boldStopIndex = 0
@@ -121,7 +119,6 @@ const getOptionElement = (suggestion, inputValue) => {
       </span>
     </span>
   )
-  /* eslint-enable camelcase */
 }
 
 /**
@@ -243,7 +240,7 @@ const Autocomplete = ({
         fetchData(inputValue, addressComponentValues)
       }
     }
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValue, delaySearch])
 
   /** Event handlers */
@@ -253,7 +250,6 @@ const Autocomplete = ({
       return
     }
 
-    /* eslint-disable camelcase */
     const { primary_line, secondary_line, city, state, zip_code } = option.value
 
     if (primaryLineOnly) {
@@ -264,7 +260,6 @@ const Autocomplete = ({
         `${primary_line}${secondary}, ${city}, ${state}, ${zip_code}`
       )
     }
-    /* eslint-enable camelcase */
   }
 
   // Fire when the user types into the input

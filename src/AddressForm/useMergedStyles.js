@@ -26,7 +26,7 @@ let baseStyles = {
     marginBottom: '1em'
   }
 }
-// eslint-disable-next-line
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (userStyles, isInternational) => {
   const mergedStyles = {}
 

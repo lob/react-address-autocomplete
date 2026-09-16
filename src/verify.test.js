@@ -48,40 +48,30 @@ describe('verify', () => {
     )
 
     const address = '1600 Pennsylvania Avenue, Washington, DC'
-    try {
-      await verify('fakeApiKey', address)
-    } catch (e) {
-      expect(e.message).toEqual(
-        'primary_line is required or address is required'
-      )
-    }
+    await expect(verify('fakeApiKey', address)).rejects.toMatchObject({
+      message: 'primary_line is required or address is required'
+    })
   })
 
   it('throws error when missing address', async () => {
     const expectedErrorMessage = 'Empty address was passed to verify function'
-    try {
-      await verify('fakeApiKey', '')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(verify('fakeApiKey', '')).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 
   it('throws error when API key is missing', async () => {
     const expectedErrorMessage = 'Missing API key'
-    try {
-      await verify('', '456 River Styx')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(verify('', '456 River Styx')).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 
   it('throws error when address is empty object', async () => {
     const expectedErrorMessage = 'Empty address was passed to verify function'
-    try {
-      await verify('fakekey', {})
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(verify('fakekey', {})).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 })
 
@@ -114,55 +104,55 @@ describe('verify international', () => {
     )
 
     const intlAddress = '42 Wallaby Way, Sydney, NSW 2031'
-    try {
-      await verifyInternational('fakeApiKey', intlAddress, 'CA')
-    } catch (e) {
-      expect(e.message).toEqual('country is required')
-    }
+    await expect(
+      verifyInternational('fakeApiKey', intlAddress, 'CA')
+    ).rejects.toMatchObject({
+      message: 'country is required'
+    })
   })
 
   it('throws error when missing country code', async () => {
     const expectedErrorMessage =
       'countryCode must be a 2 letter country short-name code (ISO 3166)'
     const intlAddress = '42 Wallaby Way, Sydney, NSW 2031'
-    try {
-      await verifyInternational('fakeApiKey', intlAddress, '')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(
+      verifyInternational('fakeApiKey', intlAddress, '')
+    ).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 
   it('throws error when country code is not string', async () => {
     const expectedErrorMessage = 'Expected countryCode to be of type string'
     const intlAddress = '42 Wallaby Way, Sydney, NSW 2031'
-    try {
-      await verifyInternational('fakeApiKey', intlAddress, { code: 'AU' })
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(
+      verifyInternational('fakeApiKey', intlAddress, { code: 'AU' })
+    ).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 
   it('throws error when API key is missing', async () => {
     const expectedErrorMessage = 'Missing API key'
-    try {
-      await verifyInternational('', '456 River Styx', 'GR')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(
+      verifyInternational('', '456 River Styx', 'GR')
+    ).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 
   it('throws error when address is empty object', async () => {
     const expectedErrorMessage = 'Empty address was passed to verify function'
-    try {
-      await verifyInternational('fakekey', {}, 'GR')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(
+      verifyInternational('fakekey', {}, 'GR')
+    ).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
     // Repeat with null
-    try {
-      await verifyInternational('fakekey', null, 'GR')
-    } catch (e) {
-      expect(e.message).toEqual(expectedErrorMessage)
-    }
+    await expect(
+      verifyInternational('fakekey', null, 'GR')
+    ).rejects.toMatchObject({
+      message: expectedErrorMessage
+    })
   })
 })
