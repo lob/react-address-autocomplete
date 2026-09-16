@@ -47,8 +47,6 @@
     "overrides": {
         "@svgr/webpack": "6.5.1",
         "resolve-url-loader": "5.0.0",
-        "svgo": "2.8.4",
-        "postcss": "8.5.28",
-        "serialize-javascript": "7.0.3"
+        "serialize-javascript": "7.0.5"
     }
 }
